@@ -24,5 +24,5 @@ describe('User can calculate BMI', () => {
         await browser.clickOnButton("button")
         let content = await browser.getContent("span[id='display_value']")
         expect(content).to.eql('Your BMI is 27.76');
-    });
+    });  
 });
