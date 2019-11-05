@@ -3,33 +3,36 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hi there</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The positive BMI calculator!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="js/person.js"></script>
     <script src="js/bmi_calculator.js"></script>
 </head>
+
 <body>
     <form id="calculate">
-        <div id="metric-inputs">
-            <input type="text" id="weight-in-kgs" placeholder="Weight">
-            <input type="text" id="height-in-cm" placeholder="Height">
+        <div class="jumbotron" style="width: 450px; background-color: #AED6F1" id="metric-inputs">
+            <input type="text" id="weight-in-kgs" placeholder="Weight" class="form-control">
+            <input type="text" id="height-in-cm" placeholder="Height" class="form-control">
+            <small id="emailHelp" class="form-text text-muted">Be true to yourself. Input the right values.</small>
         </div>
-    
-        <button type="submit" value="Calculate"> Calculate </button>
+        <button type="submit" value="Calculate" class="btn btn-dark"> Calculate </button>
     </form>
+
     <div>
         <span id="display_value"></span>
         <span id="display_message"></span>
     </div>
     <script type="text/javascript">
+
         // When the page has loaded, we create a set of global variables holding elements that we will use
         // The attribute names speak for themselves   
-
         const global = {}
 
         global.calculateForm = document.querySelector('#calculate');
         global.displayValueElement = document.querySelector('#display_value');
         global.displayMessageElement = document.querySelector('#display_message');
-
 
         // Once the page has loaded, we add listeners to the select tag and the form
         // there's a lot ol events that we can listen for. 
@@ -40,9 +43,9 @@
                 // 'preventDefault' prevents the default action the browser makes on the form
                 // we only want some java script to be executed, nothing else
                 event.preventDefault();
-                // the 'claculateBMI' function will create a ne instance of Person, calculate the 
+                // the 'calculateBMI' function will create a ne instance of Person, calculate the 
                 // BMI and return the object. Its a asynchronous function (making use of a Promise)
-                // mening we can wait for the result and execute more code once we get the result back. Hence the use of '.then()'
+                // meaning we can wait for the result and execute more code once we get the result back. Hence the use of '.then()'
                 calculateBMI()
                     .then(person => {
                         // once we have the result of the calculation, it's time to modify
@@ -67,13 +70,5 @@
             })
         };
 </script>
-    
-
-
-
-
-
 </body>
-
-
 </html>
