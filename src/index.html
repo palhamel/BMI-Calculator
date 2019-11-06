@@ -12,12 +12,27 @@
 
 <body>
     <form id="calculate">
+            <div class="form-group row">
+                    <div class="col-auto">
+                      <select class="form-control" id="my_select">
+                        <option value="metric">Metric System</option>
+                        <option value="imperial">Imperial System</option>
+                      </select>
+                    </div>
+                </div>
+                
         <div class="jumbotron" style="width: 450px; background-color: #AED6F1" id="metric-inputs">
             <input type="text" id="weight-in-kgs" placeholder="Weight" class="form-control">
             <input type="text" id="height-in-cm" placeholder="Height" class="form-control">
-            <small id="emailHelp" class="form-text text-muted">Be true to yourself. Input the right values.</small>
+            <small id="pepp-text" class="form-text text-muted">Be true to yourself. Input the right values.</small>
         </div>
         <button type="submit" value="Calculate" class="btn btn-dark"> Calculate </button>
+
+        <div id="imperial-inputs">
+            <input type="text" id="weight-in-lbs" placeholder="Weight">
+            <input type="text" id="height-in-in" placeholder="Height">
+        </div>
+
     </form>
 
     <div>
