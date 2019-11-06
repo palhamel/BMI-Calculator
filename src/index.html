@@ -11,6 +11,11 @@
 </head>
 
 <body>  
+        <nav class="navbar navbar-light bg-light">
+                <span class="navbar-brand mb-0 h1"> 
+                        <img src="https://i.imgur.com/ZtWyf1f.png" width="30" height="30" class="d-inline-block align-top" alt=""> The positive BMI calculator!</span>
+        </nav>
+
         <form id="calculate" class="jumbotron">
             <div class="form-group row">
                     <div class="col-auto">
@@ -19,7 +24,7 @@
                         <option value="imperial">Imperial System</option>
                         </select>
                     </div>
-                </div>
+            </div>
 
             <div id="metric-inputs">
                 <input type="text" id="weight-in-kgs" placeholder="Weight">
@@ -30,17 +35,25 @@
                     <input type="text" id="weight-in-lbs" placeholder="Weight">
                     <input type="text" id="height-in-in" placeholder="Height">
             </div>
-
-            <button type="submit" class="btn btn-dark" value="Calculate"> Calculate</button>
+            <br>
+            <button type="submit" class="btn btn-info" value="Calculate"> Calculate</button>
         </form>
-        <div>
+        <div class="col-auto">
             <span id="display_value"></span>
             <span id="display_message"></span>
         </div>
+        <br>
+        <div class="card" style="width: 25rem;">
+            <div class="card-body">
+                <p class="card-text">“Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine.” 
+                <br> ― Roy T. Bennett, The Light in the Heart</p>
+                <a href="https://www.goodreads.com/quotes/tag/positive-thinking" class="btn btn-link">More quotes</a>
+            </div>
+         </div>
     </body>
 </html>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
         // When the page has loaded, we create a set of global variables holding elements that we will use
         // The attribute names speak for themselves   
