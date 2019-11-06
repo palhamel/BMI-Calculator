@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The positive BMI calculator!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="src/js/person.js"></script>
+    <script src="src/js/bmi_calculator.js"></script>
+</head>
+
+<body>  
+        <nav class="navbar navbar-light bg-light">
+                <span class="navbar-brand mb-0 h1"> 
+                        <img src="https://i.imgur.com/ZtWyf1f.png" width="30" height="30" class="d-inline-block align-top" alt=""> The positive BMI calculator!</span>
+        </nav>
+
+        <form id="calculate" class="jumbotron">
+            <div class="form-group row">
+                    <div class="col-auto">
+                        <select class="form-control" id="my_select">
+                        <option value="metric">Metric System</option>
+                        <option value="imperial">Imperial System</option>
+                        </select>
+                    </div>
+            </div>
+
+            <div id="metric-inputs">
+                <input type="text" id="weight-in-kgs" placeholder="Weight">
+                <input type="text" id="height-in-cm" placeholder="Height">
+            </div>
+
+            <div id="imperial-inputs">
+                    <input type="text" id="weight-in-lbs" placeholder="Weight">
+                    <input type="text" id="height-in-in" placeholder="Height">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-info" value="Calculate"> Calculate</button>
+        </form>
+        <div class="col-auto">
+            <span id="display_value"></span>
+            <span id="display_message"></span>
+        </div>
+        <br>
+        <div class="card" style="width: 25rem;">
+            <div class="card-body">
+                <p class="card-text">“Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine.” 
+                <br> ― Roy T. Bennett, The Light in the Heart</p>
+                <a href="https://www.goodreads.com/quotes/tag/positive-thinking" class="btn btn-link">More quotes</a>
+            </div>
+         </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+
+        // When the page has loaded, we create a set of global variables holding elements that we will use
+        // The attribute names speak for themselves   
+        const global = {}
+
+        global.calculateForm = document.querySelector('#calculate');
+        global.displayValueElement = document.querySelector('#display_value');
+        global.displayMessageElement = document.querySelector('#display_message');
+        global.methodSelector = document.querySelector('#my_select');
+
+        // Once the page has loaded, we add listeners to the select tag and the form
+        // there's a lot ol events that we can listen for. 
+        // here, we listen for when a value has changed and when a form has been submitted
+        document.addEventListener('DOMContentLoaded', () => {
+            // Submit listener on the form
+            global.calculateForm.addEventListener('submit', event => {
+                // 'preventDefault' prevents the default action the browser makes on the form
+                // we only want some java script to be executed, nothing else
+                event.preventDefault();
+                // the 'calculateBMI' function will create a ne instance of Person, calculate the 
+                // BMI and return the object. Its a asynchronous function (making use of a Promise)
+                // meaning we can wait for the result and execute more code once we get the result back. Hence the use of '.then()'
+                calculateBMI()
+                    .then(person => {
+                        // once we have the result of the calculation, it's time to modify
+                        // the document and display the results for the user to see. 
+                        global.displayValueElement.innerHTML = `Your BMI is ${person.bmiValue}`;
+                        global.displayMessageElement.innerHTML = `and you are ${person.bmiMessage}`;
+                    })
+            })
+        });
+
+        const calculateBMI = () => {
+            let method = global.methodSelector.options[global.methodSelector.selectedIndex].value
+            // Finds value for the method
+            return new Promise(resolve => {
+                
+                let weightFormat = method === 'metric' ? 'weight-in-kgs' : 'weight-in-lbs'
+                let heightFormat = method === 'metric' ? 'height-in-cm' : 'height-in-in'
+                
+                // Here, for learning purposes, we will use 'document.getElementById()' to get hold of a element
+                let w = parseFloat(document.getElementById(weightFormat).value);
+                let h = parseFloat(document.getElementById(heightFormat).value);
+
+                let person = new Person({
+                    weight: w,
+                    height: h,
+                });
+
+                method === 'metric' ? person.calculate_bmi() : person.calculate_imperial_bmi();
+                resolve(person);
+            })
+        };
+</script>
