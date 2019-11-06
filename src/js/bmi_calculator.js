@@ -1,5 +1,5 @@
 function BMICalculator(){
-
+// For Metric calc:
   BMICalculator.prototype.metric_bmi = function(obj) {
     let weight = obj.weight;
     let height = obj.height;
@@ -10,6 +10,17 @@ function BMICalculator(){
     }
   };
 
+  // For Imperial calc:
+  BMICalculator.prototype.imperial_bmi = function(obj) {
+    let weight = obj.weight;
+    let height = obj.height;
+    if (weight > 0 && height > 0) {
+      let finalBmi = weight / (height * height) * 703;
+          obj.bmiValue = parseFloat(finalBmi.toFixed(2));
+          setBMIMessage(obj);
+    }
+  };
+// Message:
   function setBMIMessage (obj){
     if (obj.bmiValue < 18.5) {
       obj.bmiMessage = "Underweight"
